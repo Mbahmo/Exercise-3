@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <select name="filter" id="filter">
+            <option value=""></option>
+        </select>
         <table id="results" class="zui-table">
             <thead>
                 <tr>
@@ -28,8 +31,9 @@
                 </tr>
             </thead>
             <tbody></tbody>
-
         </table>
+        <button class="button" id="prev" style="float:left;">prev</button>
+        <button class="button" id="next" style="float:right;">next</button>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script src="index.js"></script>
     </body>

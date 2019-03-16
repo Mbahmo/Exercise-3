@@ -5,12 +5,14 @@ $(document).ready(function () {
     $("#prev").on('click', function (prev) {
         --page;
         url = "https://swapi.co/api/planets/?format=json&page=" + page;
-        
         LoadData();
     });
     $("#next").click(function (next) {
         ++page;
         url = "https://swapi.co/api/planets/?format=json&page=" + page;
+        LoadData();
+    });
+    $("#filter").on("change", function () {
         LoadData();
     });
     function LoadData() {
@@ -19,7 +21,6 @@ $(document).ready(function () {
         } else {
             $("#prev").css("visibility", "visible");
         }
-        console.log(page);
         $("#results tbody").empty();
         $.ajax({
             url: url,
@@ -32,27 +33,33 @@ $(document).ready(function () {
         });
         function drawTable(results) {
             for (var i = 0; i < Object.keys(results.results).length; i++) {
-                drawRow(i + 1, Object.values(results.results[i]));
-            }
+                if ($("#filter").val() == "All") {
+                    drawRow(i + 1, Object.values(results.results[i]));
+                } else {
+                    if (Object.values(results.results[i])[1] > $("#filter").val()) 
+                        drawRow(i + 1, Object.values(results.results[i]));
+                    }
+                }
+            // console.log(Object.values(results.results[i])[1]);
         }
-        function drawRow(no, rowresults) {
-            var row = $("<tr/>");
-            $("#results tbody").append(row);
-            row.append($("<td>" + no + "</td>"));
-            row.append($("<td>" + rowresults[0] + "</td>"));
-            row.append($("<td>" + rowresults[1] + "</td>"));
-            row.append($("<td>" + rowresults[2] + "</td>"));
-            row.append($("<td>" + rowresults[3] + "</td>"));
-            row.append($("<td>" + rowresults[4] + "</td>"));
-            row.append($("<td>" + rowresults[5] + "</td>"));
-            row.append($("<td>" + rowresults[6] + "</td>"));
-            row.append($("<td>" + rowresults[7] + "</td>"));
-            row.append($("<td>" + rowresults[8] + "</td>"));
-            row.append($("<td>" + rowresults[9] + "</td>"));
-            row.append($("<td>" + rowresults[10] + "</td>"));
-            row.append($("<td>" + rowresults[11] + "</td>"));
-            row.append($("<td>" + rowresults[12] + "</td>"));
-            row.append($("<td>" + rowresults[13] + "</td>"));
-        }
+    }
+    function drawRow(no, rowresults) {
+        var row = $("<tr/>");
+        $("#results tbody").append(row);
+        row.append($("<td>" + no + "</td>"));
+        row.append($("<td>" + rowresults[0] + "</td>"));
+        row.append($("<td>" + rowresults[1] + "</td>"));
+        row.append($("<td>" + rowresults[2] + "</td>"));
+        row.append($("<td>" + rowresults[3] + "</td>"));
+        row.append($("<td>" + rowresults[4] + "</td>"));
+        row.append($("<td>" + rowresults[5] + "</td>"));
+        row.append($("<td>" + rowresults[6] + "</td>"));
+        row.append($("<td>" + rowresults[7] + "</td>"));
+        row.append($("<td>" + rowresults[8] + "</td>"));
+        row.append($("<td>" + rowresults[9] + "</td>"));
+        row.append($("<td>" + rowresults[10] + "</td>"));
+        row.append($("<td>" + rowresults[11] + "</td>"));
+        row.append($("<td>" + rowresults[12] + "</td>"));
+        row.append($("<td>" + rowresults[13] + "</td>"));
     }
 });

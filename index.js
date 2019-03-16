@@ -25,7 +25,7 @@ $(document).ready(function () {
     function drawRow(no, rowresults) {
         console.log(rowresults);
         var row = $("<tr/>");
-        $("#results").append(row);
+        $("#results tbody").append(row);
         row.append($("<td>" + no + "</td>"));
         row.append($("<td>" + rowresults[0] + "</td>"));
         row.append($("<td>" + rowresults[1] + "</td>"));
